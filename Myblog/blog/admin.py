@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.utils.html import format_html
 
 from .models import Post, Category, Tag
+from .adminforms import PostAdminForm
 from Myblog.custom_site import custom_site
 
 
@@ -18,6 +19,7 @@ class PostAdmin(admin.ModelAdmin):
     4、date_hierarchy:创建时间
     5、fields：编辑页面所要展示的字段
     """
+    form = PostAdminForm
     list_display = [
         "title",
         "status",
