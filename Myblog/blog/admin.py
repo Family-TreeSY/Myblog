@@ -8,10 +8,11 @@ from django.utils.html import format_html
 from .models import Post, Category, Tag
 from .adminforms import PostAdminForm
 from Myblog.custom_site import custom_site
+from Myblog.custom_admin import BaseOwnerAdmin
 
 
 @admin.register(Post, site=custom_site)
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(BaseOwnerAdmin):
     """
     1、list_display是展示页面的内容
     2、search_fileds：搜索框
@@ -62,7 +63,7 @@ class PostAdmin(admin.ModelAdmin):
 
 
 @admin.register(Category, site=custom_site)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(BaseOwnerAdmin):
     list_display = [
         "name",
         "status",
@@ -88,7 +89,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Tag, site=custom_site)
-class TagAdmin(admin.ModelAdmin):
+class TagAdmin(BaseOwnerAdmin):
     list_display = [
         "name",
         "status",
