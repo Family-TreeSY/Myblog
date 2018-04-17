@@ -4,9 +4,10 @@ from __future__ import unicode_literals
 from django.contrib import admin
 
 from .models import Link, SideBar
+from Myblog.custom_site import custom_site
 
 
-@admin.register(Link)
+@admin.register(Link, site=custom_site)
 class LinkAdmin(admin.ModelAdmin):
     list_display = [
         "title",
@@ -22,7 +23,7 @@ class LinkAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(SideBar)
+@admin.register(SideBar, site=custom_site)
 class SideBarAdmin(admin.ModelAdmin):
     list_display = [
         "title",
