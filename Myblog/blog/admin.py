@@ -56,11 +56,6 @@ class PostAdmin(BaseOwnerAdmin):
     # 不加简短描述，管理界面会显示operator
     operator.short_description = "操作"
 
-    # 保证每条数据都属于当前用户
-    def save_model(self, request, obj, form, change):
-        obj.author = request.user
-        return super(PostAdmin, self).save_model(request, obj, form, change)
-
 
 @admin.register(Category, site=custom_site)
 class CategoryAdmin(BaseOwnerAdmin):
