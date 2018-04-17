@@ -34,8 +34,7 @@ class PostAdmin(admin.ModelAdmin):
         "author__username",
     ]
     list_filter = (
-        "author",
-        "status",
+        "category",
     )
     date_hierarchy = "created_time"
     # 编辑页面

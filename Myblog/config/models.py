@@ -27,6 +27,9 @@ class Link(models.Model):
     class Meta:
         verbose_name = verbose_name_plural = "友链"
 
+    def __unicode__(self):
+        return self.title
+
 
 class SideBar(models.Model):
     """侧边栏"""
@@ -58,3 +61,7 @@ class SideBar(models.Model):
 
     class Meta:
         verbose_name = verbose_name_plural = "侧边栏"
+
+    def __unicode__(self):
+        return self.title
+
