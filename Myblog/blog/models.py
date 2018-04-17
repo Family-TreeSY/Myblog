@@ -47,6 +47,7 @@ class Post(models.Model):
     5、status默认为1,意思是文章默认状态是上线状态
     6、auto_now_add为创建时使用
     7、auto_now为更新时使用
+    8、blank是针对表单的，如果 blank=True，表示你的表单填写该字段的时候可以不填
     """
     STATUS_ITEM = (
         (1, "上线"),
