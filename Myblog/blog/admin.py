@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
+from django.urls import reverse
+from django.utils.html import format_html
 
 from .models import Post, Category, Tag
 from Myblog.custom_site import custom_site
@@ -22,6 +24,7 @@ class PostAdmin(admin.ModelAdmin):
         "category",
         "author",
         "created_time",
+        "operator",
     ]
     search_fields = [
         "title",
@@ -43,6 +46,14 @@ class PostAdmin(admin.ModelAdmin):
         "content",
     )
 
+    def operator(self, obj):
+        return format_html(
+            '<a href="{}">编辑</a>',
+            reverse("cus_admin:blog_post_change", args=(obj.id,))
+        )
+    # 不加简短描述，管理界面会显示operator
+    operator.short_description = "操作"
+
 
 @admin.register(Category, site=custom_site)
 class CategoryAdmin(admin.ModelAdmin):
@@ -52,6 +63,7 @@ class CategoryAdmin(admin.ModelAdmin):
         "is_nav",
         "author",
         "created_time",
+        "operator",
     ]
     fields = (
         "name",
@@ -59,6 +71,14 @@ class CategoryAdmin(admin.ModelAdmin):
         "is_nav",
         "author",
     )
+
+    def operator(self, obj):
+        return format_html(
+            '<a href="{}">编辑</a>',
+            reverse("cus_admin:blog_category_change", args=(obj.id,))
+        )
+    # 不加简短描述，管理界面会显示operator
+    operator.short_description = "操作"
 
 
 @admin.register(Tag, site=custom_site)
@@ -68,9 +88,18 @@ class TagAdmin(admin.ModelAdmin):
         "status",
         "author",
         "created_time",
+        "operator",
     ]
     fields = (
         "name",
         "status",
         "author",
     )
+
+    def operator(self, obj):
+        return format_html(
+            '<a href="{}">编辑</a>',
+            reverse("cus_admin:blog_tag_change", args=(obj.id,))
+        )
+    # 不加简短描述，管理界面会显示operator
+    operator.short_description = "操作"
