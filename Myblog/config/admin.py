@@ -2,6 +2,9 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
+from django.utils.html import format_html
+from django.urls import reverse
+
 
 from .models import Link, SideBar
 from Myblog.custom_site import custom_site
@@ -15,12 +18,22 @@ class LinkAdmin(admin.ModelAdmin):
         "weight",
         "author",
         "created_time",
+        "operator",
     ]
     fields = (
         ("title", "weight"),
         "href",
         "author",
     )
+
+    def operator(self, obj):
+        return format_html(
+            '<a href="{}">编辑</a>',
+            reverse("cus_admin:config_link_change", args=(obj.id,))
+        )
+        # 不加简短描述，管理界面会显示operator
+
+    operator.short_description = "操作"
 
 
 @admin.register(SideBar, site=custom_site)
@@ -31,6 +44,7 @@ class SideBarAdmin(admin.ModelAdmin):
         "display_type",
         "author",
         "created_time",
+        "operator"
     ]
     fields = (
         ("title", "status"),
@@ -38,3 +52,13 @@ class SideBarAdmin(admin.ModelAdmin):
         "author",
         "content",
     )
+
+    def operator(self, obj):
+        return format_html(
+            '<a href="{}">编辑</a>',
+            reverse("cus_admin:config_sidebar_change", args=(obj.id,))
+        )
+        # 不加简短描述，管理界面会显示operator
+
+    operator.short_description = "操作"
+
