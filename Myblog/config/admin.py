@@ -8,10 +8,11 @@ from django.urls import reverse
 
 from .models import Link, SideBar
 from Myblog.custom_site import custom_site
+from Myblog.custom_admin import BaseOwnerAdmin
 
 
 @admin.register(Link, site=custom_site)
-class LinkAdmin(admin.ModelAdmin):
+class LinkAdmin(BaseOwnerAdmin):
     list_display = [
         "title",
         "href",
@@ -37,7 +38,7 @@ class LinkAdmin(admin.ModelAdmin):
 
 
 @admin.register(SideBar, site=custom_site)
-class SideBarAdmin(admin.ModelAdmin):
+class SideBarAdmin(BaseOwnerAdmin):
     list_display = [
         "title",
         "status",
