@@ -5,7 +5,9 @@ from django.shortcuts import render
 from django.http import Http404
 from django.core.paginator import Paginator, EmptyPage
 
-from .models import Post, Tag
+from .models import Post, Tag, Category
+from config.models import SideBar
+from comment.models import Comment
 
 
 def post_list(request, category_id=None, tag_id=None):
@@ -41,8 +43,33 @@ def post_list(request, category_id=None, tag_id=None):
         # 页面超过页数范围就传递最后一页数据
         posts = paginator.page(paginator.num_pages)
 
+    """分类
+    1、nav_cates = categoryies.filter(is_nav=True) 导航分类
+    2、cates = categories.filter(is_nav=False) 普通分类
+    3、Category.objects.all()返回一个queryset对象复制给categories
+    """
+    categories = Category.objects.all()
+    cates = []
+    nav_cates = []
+    for category in categories:
+        if category.is_nav:
+            nav_cates.append(category)
+        else:
+            cates.append(category)
+
+    """
+    侧边栏
+    """
+    sidebars = SideBar.objects.filter(status=1)
+    recently_posts = Post.objects.filter(status=1)[:5]
+    recently_comments = Comment.objects.filter(status=1)[:2]
     context = {
         "posts": posts,
+        "nav_cates": nav_cates,
+        "cates": cates,
+        "sidebars": sidebars,
+        "recently_posts": recently_posts,
+        "recently_comments": recently_comments,
     }
     return render(request, "blog/list.html", context=context)
 

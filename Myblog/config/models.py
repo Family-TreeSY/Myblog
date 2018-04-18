@@ -41,7 +41,7 @@ class SideBar(models.Model):
         (1, "HTML"),
         (2, "最新文章"),
         (3, "最热文章"),
-        (4, "最热评论"),
+        (4, "最近评论"),
     )
     title = models.CharField(max_length=50, verbose_name="标题")
     status = models.PositiveIntegerField(
