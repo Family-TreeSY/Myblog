@@ -13,5 +13,10 @@
     <hr/>
     {% endfor %}
 </ul>
+{% if posts.has_previous %}<a href="?page={{ posts.number|add:'-1' }}">上一页</a>
+{% endif %}
+Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+{% if posts.has_next %}<a href="?page={{ posts.number|add:'1' }}">下一页</a>
+{% endif %}
 </body>
 </html>

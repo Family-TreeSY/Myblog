@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from django.http import Http404
+from django.core.paginator import Paginator, EmptyPage
 
 from .models import Post, Tag
 
@@ -12,6 +13,15 @@ def post_list(request, category_id=None, tag_id=None):
         1、render传入Http请求后，根据第二个参数blog/list.html找到这个模板并且读取它的值
         2、context是字典数据，传递到模板
     """
+    # 从第一页开始
+    page = request.GET.get("page", 1)
+    # 每页数据量
+    page_size = 4
+    try:
+        page = int(page)
+    except TypeError:
+        page = 1
+
     queryset = Post.objects.all()
     if category_id:
         queryset = queryset.filter(category_id=category_id)
@@ -22,8 +32,17 @@ def post_list(request, category_id=None, tag_id=None):
             queryset = []
         else:
             queryset = tag.posts.all()
+
+    # 创建Paginator实例,每页展示4篇文章
+    paginator = Paginator(queryset, page_size)
+    try:
+        posts = paginator.page(page)
+    except EmptyPage:
+        # 页面超过页数范围就传递最后一页数据
+        posts = paginator.page(paginator.num_pages)
+
     context = {
-        "posts": queryset,
+        "posts": posts,
     }
     return render(request, "blog/list.html", context=context)
 
