@@ -5,7 +5,13 @@
     <title>Treehl的博客</title>
 </head>
 <body>
-<h1>Hello, World</h1>
-<p>Learing Django</p>
+<h1>Treehl的博客</h1>
+<ul>
+    {% for post in posts %}
+    title: <a href="{% url 'detail' post.id %}">{{ post.title }}</a><br/>
+    desc: {{ post.desc }}
+    <hr/>
+    {% endfor %}
+</ul>
 </body>
 </html>

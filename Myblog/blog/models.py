@@ -66,7 +66,7 @@ class Post(models.Model):
         default=1, choices=STATUS_ITEM, verbose_name="状态"
     )
     category = models.ForeignKey(Category, verbose_name="分类")
-    tag = models.ManyToManyField(Tag, verbose_name="标签")
+    tag = models.ManyToManyField(Tag, related_name= "posts", verbose_name="标签")
     author = models.ForeignKey(User, verbose_name="作者")
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
     last_update_time = models.DateTimeField(auto_now=True, verbose_name="更新时间")

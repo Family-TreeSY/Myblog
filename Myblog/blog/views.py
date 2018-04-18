@@ -2,6 +2,9 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
+from django.http import Http404
+
+from .models import Post, Tag
 
 
 def post_list(request, category_id=None, tag_id=None):
@@ -9,8 +12,18 @@ def post_list(request, category_id=None, tag_id=None):
         1、render传入Http请求后，根据第二个参数blog/list.html找到这个模板并且读取它的值
         2、context是字典数据，传递到模板
     """
+    queryset = Post.objects.all()
+    if category_id:
+        queryset = queryset.filter(category_id=category_id)
+    elif tag_id:
+        try:
+            tag = Tag.objects.get(id=tag_id)
+        except Tag.DoesNotExist:
+            queryset = []
+        else:
+            queryset = tag.posts.all()
     context = {
-        "post_list": post_list,
+        "posts": queryset,
     }
     return render(request, "blog/list.html", context=context)
 
@@ -19,7 +32,11 @@ def post_detail(request, pk=None):
     """pk就是post_id
     name的值会被传到模板中
     """
+    try:
+        queryset = Post.objects.get(pk=pk)
+    except queryset.DoesNotExist:
+        return Http404("Post is not exist!")
     context = {
-        "name": "Treehl",
+        "post": queryset,
     }
     return render(request, "blog/detail.html", context=context)
