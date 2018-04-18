@@ -10,6 +10,37 @@ from config.models import SideBar
 from comment.models import Comment
 
 
+def get_common_context():
+    """分类
+        1、nav_cates = categoryies.filter(is_nav=True) 导航分类
+        2、cates = categories.filter(is_nav=False) 普通分类
+        3、Category.objects.all()返回一个queryset对象复制给categories
+        """
+    categories = Category.objects.all()
+    cates = []
+    nav_cates = []
+    for category in categories:
+        if category.is_nav:
+            nav_cates.append(category)
+        else:
+            cates.append(category)
+
+    """
+    侧边栏
+    """
+    sidebars = SideBar.objects.filter(status=1)
+    recently_posts = Post.objects.filter(status=1)[:5]
+    recently_comments = Comment.objects.filter(status=1)[:2]
+    context = {
+        "nav_cates": nav_cates,
+        "cates": cates,
+        "sidebars": sidebars,
+        "recently_posts": recently_posts,
+        "recently_comments": recently_comments,
+    }
+    return context
+
+
 def post_list(request, category_id=None, tag_id=None):
     """render()方法根据我们传入的参数来构造Httpresponse
         1、render传入Http请求后，根据第二个参数blog/list.html找到这个模板并且读取它的值
@@ -43,34 +74,11 @@ def post_list(request, category_id=None, tag_id=None):
         # 页面超过页数范围就传递最后一页数据
         posts = paginator.page(paginator.num_pages)
 
-    """分类
-    1、nav_cates = categoryies.filter(is_nav=True) 导航分类
-    2、cates = categories.filter(is_nav=False) 普通分类
-    3、Category.objects.all()返回一个queryset对象复制给categories
-    """
-    categories = Category.objects.all()
-    cates = []
-    nav_cates = []
-    for category in categories:
-        if category.is_nav:
-            nav_cates.append(category)
-        else:
-            cates.append(category)
-
-    """
-    侧边栏
-    """
-    sidebars = SideBar.objects.filter(status=1)
-    recently_posts = Post.objects.filter(status=1)[:5]
-    recently_comments = Comment.objects.filter(status=1)[:2]
     context = {
         "posts": posts,
-        "nav_cates": nav_cates,
-        "cates": cates,
-        "sidebars": sidebars,
-        "recently_posts": recently_posts,
-        "recently_comments": recently_comments,
     }
+    common_context = get_common_context()
+    context.update(common_context)
     return render(request, "blog/list.html", context=context)
 
 
@@ -85,4 +93,6 @@ def post_detail(request, pk=None):
     context = {
         "post": queryset,
     }
+    common_context = get_common_context()
+    context.update(common_context)
     return render(request, "blog/detail.html", context=context)

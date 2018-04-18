@@ -1,7 +1,18 @@
+{% extends "./base.html" %}
+
+{% block content %}
 <html>
 <body>
-<a href="/">首页</a>
+<div>
+    <ul>
+        <li><a href="/">首页</a></li>
+        <li><a href="">{{ post.category.name }}</a></li>
+        <li>正文</li>
+    </ul>
+</div>
+
 <h4>{{ post.title }}</h4>
 {{ post.content }}
 </body>
 </html>
+{% endblock %}
