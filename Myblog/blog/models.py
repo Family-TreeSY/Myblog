@@ -71,6 +71,10 @@ class Post(models.Model):
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
     last_update_time = models.DateTimeField(auto_now=True, verbose_name="更新时间")
 
+    def status_show(self):
+        return "当前状态:%s" % self.status
+    status_show.short_description = "展示状态"
+
     class Meta:
         verbose_name = verbose_name_plural = "文章"
 
