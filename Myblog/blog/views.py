@@ -50,7 +50,7 @@ class BasePostView(CommonMixin, ListView):
     """
     model = Post
     paginate_by = 3
-    template_name = "blog/list.html"
+    template_name = "themes/default/blog/list.html"
     context_object_name = "posts"
 
 
@@ -86,5 +86,5 @@ class TagView(BasePostView):
 
 class PostView(CommonMixin, DetailView):
     model = Post
-    template_name = "blog/detail.html"
+    template_name = "themes/default/blog/detail.html"
     context_object_name = "post"

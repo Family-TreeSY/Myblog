@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css">
+      <style>
+            /*分类、标签、创建时间对齐样式和颜色*/
+          .post-element-nav {
+                padding-top: 0;
+                padding-bottom: 0;
+                color: #428bca;
+
+          }
+          /*文章标题字体大小以及对齐*/
+          .post-element-title {
+                font-size: 25px;
+                border-bottom: 1px solid #ccc;
+          }
+          /*文章标题颜色*/
+          .post-element-title a{
+                color:#333;
+          }
+          /*分类导航与文章列表之间的距离*/
+          .main {
+                margin-top: 10px;
+          }
+      </style>
+
+      <title>Treehl</title>
+    </head>
+<body>
+
+ <div class="container">
+    <h3>
+      <a href="/">Treeh的博客</a>
+      <small class="text-muted"></small>
+    </h3>
+</div>
+
+<div class="container">
+  <nav class="nav">
+      {% for cate in nav_cates %}
+       <a class="nav-link" href="{% url 'category' cate.id %}">{{ cate.name }}</a>
+      {% endfor %}
+  </nav>
+</div>
+<hr/>
+
+<div class="container">
+    <div class="row main">
+        <div class="col-9">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+        <div class="col-3">
+            {% for sidebar in sidebars %}
+                <h4>{{ sidebar.title }}</h4>
+                <div>
+                    {% if sidebar.display_type == 1 %}
+                    {% autoescape on %}
+                        {{ sidebar.content }}
+                    {% endautoescape %}
+                    {% elif sidebar.display_type == 2 %}
+                    <ul>
+                        {% for post in recently_posts %}
+                            <li>
+                                {{ post.title }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% elif sidebar.display_type == 4%}
+                    <ul>
+                        {% for comment in recently_comments %}
+                            <li>
+                                {{ comment.content }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+<hr/>
+<footer class="footer">
+  <div class="container">
+     <nav class="nav">
+         {% for cate in cates %}
+         <a class="nav-link" href="{% url 'category' cate.id %}">{{ cate.name }}</a>
+         {% endfor %}
+     </nav>
+  </div>
+  <div class="container">
+    <span class="text-muted">Power by Myblog@treehl</span>
+  </div>
+</footer>
+</div>
+</body>
+</html>
