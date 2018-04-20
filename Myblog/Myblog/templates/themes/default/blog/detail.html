@@ -4,15 +4,30 @@
 <html>
 <body>
 <div>
-    <ul>
-        <li><a href="/">首页</a></li>
-        <li><a href="">{{ post.category.name }}</a></li>
-        <li>正文</li>
-    </ul>
+     <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首页</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'category' post.category_id %}">{{ post.category.name }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">正文</li>
+      </ol>
+    </nav>
 </div>
 
 <h4>{{ post.title }}</h4>
+<div>
+  <nav class="nav">
+      分类:<a class="nav-link post-element-nav" href="{% url 'category' post.category_id %}">{{ post.category }}</a>
+      {% for tg in post.tag.all %}
+      标签:<a class="nav-link post-element-nav" href="{% url 'tag' tg.id %}">
+      {{ tg.name }}
+      {% endfor %}</a>
+      作者:<a class="nav-link post-element-nav" href="#">{{ post.author }}</a>
+      创建时间:<a class="nav-link post-element-nav" href="#">{{ post.created_time }}</a>
+  </nav>
+</div>
+<div class="post-element-content">
 {{ post.content }}
+</div>
 </body>
 </html>
 {% endblock %}
