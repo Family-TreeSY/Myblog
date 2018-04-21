@@ -1,0 +1,88 @@
+ <!--body {-->
+                <!--background-color: #eeeeee; # 页面背景色-->
+           <!--}-->
+           .fixed-top {
+                position: fixed;
+                right: 0;
+                left: 0;
+                border-width: 0 0 1px;
+           }
+           header {
+                height: 60px;
+                background-color: #3d4450;
+                border-color: #080808;
+                line-height: 50px; # 居中
+           }
+           header nav a {
+                color: #fff;
+                padding: 0 1.5rem 0 1.5rem; # 导航分类间距(padding: 上下左右)
+           }
+           header nav a:hover {
+                color: #fff;
+                text-decoration: none;
+                background-color: #000; # 导航分类光标移动出现黑色背景
+           }
+           header a.log {
+                font-size: 1.5rem;
+                padding-left: 0;
+           }
+           header a.log:hover {
+                background-color: #3d4450; # typeidea不出现黑色背景
+           }
+           /*主体部分,左侧右侧栏为白色背景*/
+           <!--.main .left-side .inner {-->
+                <!--background-color: #fff;-->
+                <!--padding: 20px 10px;-->
+           <!--}-->
+           <!--.main .right-side .inner {-->
+                <!--background-color: #fff;-->
+           }
+           .category a{
+                padding-top: 20px;
+                margin-right: 20px; # 导航分类之间的距离
+           }
+          .post-element-nav {
+                padding-top: 0;
+                padding-bottom: 0;
+                color: #428bca;
+          }
+          .post-element-title {
+                font-size: 25px;
+                border-bottom: 1px solid #ccc; # 放下面a 就是标题下出现下划线
+          }
+          .post-element-title a{
+                color: #333;
+                text-decoration: none;
+          }
+          .post-element-desc {
+                padding: 1rem;
+          }
+          .main {
+                margin-top: 80px;
+          }
+          .main ul {
+                padding-left: 0px;
+          }
+         .post-element article {
+                margin-top: 10px; #
+          }
+         .by {
+                margin-top: 40px;
+          }
+          .sidebar li {
+                list-style: none;
+          }
+          .sidebar a {
+                color: #444;
+          }
+          .sidebar-title {
+                height: 30px;
+                background-color: #3d4450;
+                border-color: #080808;
+                line-height: 30px;
+                color: #fff;
+                padding: 0 9px;
+          }
+          .sidebar-content {
+                padding: 0 9px;
+          }

@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 """
 Django settings for Myblog project.
 
@@ -57,6 +58,15 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'Myblog.urls'
 
 THEME = 'themes/default'
+
+# 部署的时候用
+STATIC_ROOT = '/tmp/static'
+# 静态资源路径
+STATIC_URL = '/static/'
+# 静态资源所在目录
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, THEME, "static"),
+]
 
 TEMPLATES = [
     {
