@@ -1,5 +1,6 @@
- <!--body {-->
-                <!--background-color: #eeeeee; # 页面背景色-->
+        /*页面背景色*/
+        <!--body {-->
+                <!--background-color: #eeeeee;
            <!--}-->
            .fixed-top {
                 position: fixed;
@@ -13,21 +14,24 @@
                 border-color: #080808;
                 line-height: 50px; # 居中
            }
+           /*导航分类间距(padding: 上左下右)*/
            header nav a {
                 color: #fff;
-                padding: 0 1.5rem 0 1.5rem; # 导航分类间距(padding: 上下左右)
+                padding: 0 1.5rem 0 1.5rem;
            }
+
            header nav a:hover {
                 color: #fff;
                 text-decoration: none;
-                background-color: #000; # 导航分类光标移动出现黑色背景
+                background-color: #000;
            }
            header a.log {
                 font-size: 1.5rem;
                 padding-left: 0;
            }
+           /*typeidea不出现黑色背景*/
            header a.log:hover {
-                background-color: #3d4450; # typeidea不出现黑色背景
+                background-color: #3d4450;
            }
            /*主体部分,左侧右侧栏为白色背景*/
            <!--.main .left-side .inner {-->
@@ -48,7 +52,7 @@
           }
           .post-element-title {
                 font-size: 25px;
-                border-bottom: 1px solid #ccc; # 放下面a 就是标题下出现下划线
+                border-bottom: 1px solid #ccc;
           }
           .post-element-title a{
                 color: #333;
