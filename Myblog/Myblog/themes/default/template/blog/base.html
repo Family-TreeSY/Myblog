@@ -4,128 +4,175 @@
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-      <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css">
       <style>
-            /*分类、标签、创建时间对齐样式和颜色*/
+           <!--body {-->
+                <!--background-color: #eeeeee; # 页面背景色-->
+           <!--}-->
+           .fixed-top {
+                position: fixed;
+                right: 0;
+                left: 0;
+                border-width: 0 0 1px;
+           }
+           header {
+                height: 60px;
+                background-color: #3d4450;
+                border-color: #080808;
+                line-height: 50px; # 居中
+           }
+           header nav a {
+                color: #fff;
+                padding: 0 1.5rem 0 1.5rem; # 导航分类间距(padding: 上下左右)
+           }
+           header nav a:hover {
+                color: #fff;
+                text-decoration: none;
+                background-color: #000; # 导航分类光标移动出现黑色背景
+           }
+           header a.log {
+                font-size: 1.5rem;
+                padding-left: 0;
+           }
+           header a.log:hover {
+                background-color: #3d4450; # typeidea不出现黑色背景
+           }
+           /*主体部分,左侧右侧栏为白色背景*/
+           <!--.main .left-side .inner {-->
+                <!--background-color: #fff;-->
+                <!--padding: 20px 10px;-->
+           <!--}-->
+           <!--.main .right-side .inner {-->
+                <!--background-color: #fff;-->
+           }
+           .category a{
+                padding-top: 20px;
+                margin-right: 20px; # 导航分类之间的距离
+           }
           .post-element-nav {
                 padding-top: 0;
                 padding-bottom: 0;
                 color: #428bca;
-
           }
-          /*文章标题字体大小以及对齐*/
           .post-element-title {
                 font-size: 25px;
-                border-bottom: 1px solid #ccc;
+                border-bottom: 1px solid #ccc; # 放下面a 就是标题下出现下划线
           }
-          /*文章标题颜色*/
           .post-element-title a{
-                color:#333;
+                color: #333;
+                text-decoration: none;
           }
-          /*分类导航与文章列表之间的距离*/
+          .post-element-desc {
+                padding: 1rem;
+          }
           .main {
-                margin-top: 5px;
-          }
-           /*正文页内容与标题之间距离*/
-          .post-element-content {
-                margin-top: 10px;
+                margin-top: 80px;
           }
           .main ul {
                 padding-left: 0px;
           }
-           /*博客标题页边距*/
-          .banner {
-                margin-top: 20px;
+         .post-element article {
+                margin-top: 10px; #
           }
-           /*页脚距离普通分类的距离*/
-          .power {
-                margin-top: 20px;
+         .by {
+                margin-top: 40px;
           }
-           /*侧边栏消除ul带来的点号*/
           .sidebar li {
                 list-style: none;
           }
           .sidebar a {
                 color: #444;
           }
+          .sidebar-title {
+                height: 30px;
+                background-color: #3d4450;
+                border-color: #080808;
+                line-height: 30px;
+                color: #fff;
+                padding: 0 9px;
+          }
+          .sidebar-content {
+                padding: 0 9px;
+          }
 
       </style>
+      <title>Treehl的博客</title>
+  </head>
+  <body>
 
-      <title>Treehl</title>
-    </head>
-<body>
+  <header class="fixed-top">
+      <div class="container">
+          <div class="row">
+                <nav class="nav">
+                    <a class="log" href="/">Myblog</a>
+                    <a class="index" href="/">首页</a>
+                    {% for cate in nav_cates %}
+                    <a class="link" href="{% url 'category' cate.id %}">{{ cate.name }}</a>
+                    {% endfor %}
+                </nav>
+          </div>
+      </div>
+  </header>
 
-<div class="container">
-    <h3 class="banner">
-      <a href="/">Treeh的博客</a>
-      <small class="text-muted"></small>
-    </h3>
-</div>
 
-<div class="container">
-    <nav class="nav">
-        <a class="nav-link" href="/">首页</a>
-        {% for cate in nav_cates %}
-        <a class="nav-link" href="{% url 'category' cate.id %}">{{ cate.name }}</a>
-        {% endfor %}
-    </nav>
-</div>
-<hr/>
-
-<div class="container main">
-    <div class="row">
-        <div class="col-9">
-            {% block content %}
-
-            {% endblock %}
-        </div>
-        <div class="col-3">
-            {% for sidebar in sidebars %}
-                <div class="container sidebar">
-                    <h4>{{ sidebar.title }}</h4>
-                        <ul>
-                            {% if sidebar.display_type == 1 %}
+    <div class="container main">
+        <div class="row">
+            <div class="col-8 left-side">
+                <div class="inner">
+                {% block content %}
+                {% endblock %}
+                </div>
+            </div>
+            <div class="col-3 right-side">
+                <div class="inner">
+                {% for side in sidebars %}
+                <div class="sidebar">
+                    <div class="sidebar-title">{{ side.title }}</div>
+                    <div class="sidebar-content">
+                        {% if side.display_type == 1 %}
                             {% autoescape on %}
-                                {{ sidebar.content }}
+                            {{ side.content }}
                             {% endautoescape %}
-                            {% elif sidebar.display_type == 2 %}
-                        </ul>
+                        {% elif side.display_type == 2 %}
                         <ul>
                             {% for post in recently_posts %}
-                                <li>
-                                    <a href="{% url 'detail' post.id %}">{{ post.title }}</a>
-                                </li>
+                            <li><a href="{% url 'detail' post.pk %}">{{ post.title }}</a></li>
                             {% endfor %}
                         </ul>
-                        {% elif sidebar.display_type == 4%}
+                        {% elif side.display_type == 3 %}
+                        <ul>
+                            {% for post in hot_posts %}
+                            <li><a href="{% url 'detail' post.pk %}">{{ post.title }} - {{ post.pv }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        {% elif side.display_type == 4 %}
                         <ul>
                             {% for comment in recently_comments %}
-                                <li>
-                                    {{ comment.content }}
-                                </li>
+                            <li>{{ comment.content }}</li>
                             {% endfor %}
                         </ul>
-                    {% endif %}
+
+                        {% endif %}
+                    </div>
                 </div>
-            {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 
-<hr/>
-<div class="container">
- <nav class="nav">
-     {% for cate in cates %}
-     <a class="nav-link" href="{% url 'category' cate.id %}">{{ cate.name }}</a>
-     {% endfor %}
- </nav>
-</div>
-<footer class="footer power">
-  <div class="container">
-    <span class="text-muted">Power by Myblog@treehl</span>
-  </div>
-</footer>
-</div>
-</body>
+  <footer class="footer">
+      <div class="container">
+          <hr/>
+          <nav class="nav category">
+              {% for cate in cates %}
+                <a href="{% url 'category' cate.id %}">{{ cate.name }}</a>
+              {% endfor %}
+          </nav>
+      </div>
+      <div class="container by">
+          <span class="text-muted">Power by Myblog@treehl</span>
+      </div>
+  </footer>
+  </body>
 </html>
