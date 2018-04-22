@@ -1,14 +1,17 @@
 {% extends "./base.html" %}
 
 {% block content %}
-<ul>
-<div class="post-element">
-  <div>
-      {% if posts %}
-        {% for post in posts %}
-          <h3 class="post-element-title">
-              <a href="{% url 'detail' post.id %}">{{ post.title }}</a>
-          </h3>
+{% if query %}
+    您搜索的： {{ query }} 结果如下：
+{% endif %}
+<hr/>
+
+{% if posts %}
+    {% for post in posts %}
+        <div class="post-element">
+            <h3 class="post-element-title">
+                <a href="{% url 'detail' post.id %}">{{ post.title }}</a>
+            </h3>
           <div>
               <nav class="nav">
                   分类:<a class="nav-link post-element-nav" href="{% url 'category' post.category_id %}">{{ post.category }}</a>
@@ -20,9 +23,10 @@
                   创建时间:<a class="nav-link post-element-nav" href="#">{{ post.created_time }}</a>
               </nav>
           </div>
-          <div>
-              <p>> {{ post.desc }}</p>
-          </div>
+      <div>
+      </div>
+        <p>> {{ post.desc }}</p>
+      </div>
         {% endfor %}
           {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">上一页</a>
             {% endif %}
@@ -32,7 +36,5 @@
       {% else %}
         Empty!
       {% endif %}
-  </div>
-</div>
-</ul>
+
 {% endblock %}
