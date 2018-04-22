@@ -17,9 +17,11 @@ class CommentAdmin(BaseOwnerAdmin):
         "nickname",
         "status",
         "email",
+        "website",
         "created_time",
         "operator",
     ]
+
     fields = (
         ("target", "status"),
         "content",
