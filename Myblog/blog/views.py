@@ -55,7 +55,24 @@ class BasePostView(CommonMixin, ListView):
 
 
 class IndexView(BasePostView):
-    pass
+    """增加搜索功能
+    1、数据过滤
+    2、数据传递到模板里
+    3、request.GET.get(query):通过get请求获取的数据都存放在request.GET中，
+    所以它是一个字典对象，用get来获取query键
+    4、如果query存在就过滤出所有以query开头的数据，i表示不区分大小写，
+    如果query不存在就返回
+    """
+    def get_queryset(self):
+        query = self.request.GET.get("query")
+        qs = super(IndexView, self).get_queryset()
+        if query:
+            qs = qs.filter(title__icontains=query)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        query = self.request.GET.get('query')
+        return super(IndexView, self).get_context_data(query=query)
 
 
 class CategoryView(BasePostView):
