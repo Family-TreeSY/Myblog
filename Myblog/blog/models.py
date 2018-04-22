@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
+import markdown
+
 
 class Category(models.Model):
     STATUS_ITEMS = (
@@ -61,7 +63,9 @@ class Post(models.Model):
     )
     title = models.CharField(max_length=50, verbose_name="标题")
     desc = models.CharField(max_length=255, blank=True, verbose_name="摘要")
+    is_markdown = models.BooleanField(verbose_name="使用markdown", default=True)
     content = models.TextField(verbose_name="正文内容", help_text="正文必须为markdown")
+    html = models.TextField(verbose_name='html渲染后的页面', default="", help_text='正文必须为MarkDown格式')
     status = models.PositiveIntegerField(
         default=1, choices=STATUS_ITEM, verbose_name="状态"
     )
@@ -70,6 +74,17 @@ class Post(models.Model):
     author = models.ForeignKey(User, verbose_name="作者")
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
     last_update_time = models.DateTimeField(auto_now=True, verbose_name="更新时间")
+
+    def save(self, *args, **kwargs):
+        if self.is_markdown:
+            self.html = markdown.markdown(
+                self.content, extensions=[
+                    'markdown.extensions.extra',
+                    'markdown.extensions.codehilite',
+                    'markdown.extensions.toc',
+                ]
+            )
+        return super(Post, self).save(*args, **kwargs)
 
     def status_show(self):
         return "当前状态:%s" % self.status

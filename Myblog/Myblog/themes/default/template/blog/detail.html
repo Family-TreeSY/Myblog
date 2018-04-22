@@ -25,7 +25,7 @@
   </nav>
 </div>
 <div class="post-element-content">
-{{ post.content }}
+{{ post.html|safe }}
 </div>
 
 {% include "comment/block.html" %}
