@@ -36,6 +36,7 @@ class PostAdmin(BaseOwnerAdmin):
     ]
     list_filter = (
         "category",
+        "author",
     )
     date_hierarchy = "created_time"
     # 编辑页面

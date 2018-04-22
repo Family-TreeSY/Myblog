@@ -19,7 +19,7 @@
                   标签:<a class="nav-link post-element-nav" href="{% url 'tag' tg.id %}">
                   {{ tg.name }}
                   {% endfor %}</a>
-                  作者:<a class="nav-link post-element-nav" href="#">{{ post.author }}</a>
+                  作者:<a class="nav-link post-element-nav" href="{% url 'author' post.author_id %}">{{ post.author }}</a>
                   创建时间:<a class="nav-link post-element-nav" href="#">{{ post.created_time }}</a>
               </nav>
           </div>

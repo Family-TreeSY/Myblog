@@ -77,6 +77,8 @@ class Post(models.Model):
 
     class Meta:
         verbose_name = verbose_name_plural = "文章"
+        # 指定排序，最新文章最靠前
+        ordering = ['-id']
 
     def __unicode__(self):
         return self.title

@@ -81,7 +81,6 @@ class CategoryView(BasePostView):
     2、self.kwargs从url中得到category_id
     3、get_queryset获取全部文章后再使用filter来过滤分类并返回
     """
-
     def get_queryset(self):
         qs = super(CategoryView, self).get_queryset()
         # self.kwargs:获取url中的名字,(?P<category_id>\d+)
@@ -99,6 +98,15 @@ class TagView(BasePostView):
             return []
         posts = tag.posts.all()
         return posts
+
+
+class AuthorView(BasePostView):
+    def get_queryset(self):
+        query = self.kwargs.get("author_id")
+        qs = super(AuthorView, self).get_queryset()
+        if query:
+            qs = qs.filter(author_id=query)
+        return qs
 
 
 class PostView(CommonMixin, DetailView):
