@@ -7,3 +7,18 @@
         <input type="submit" value="发表">
     </form>
  </div>
+<ul class="list-group">
+    {% for comment in comment_list %}
+        <li class="list-group-item">
+            <div class="nickname">
+                <a href="{{ comment.website }}">{{ comment.nickname }}</a>
+                <span>
+                    {{ comment.created_time }}
+                </span>
+            </div>
+            <div class="comment-content">
+                {{ comment.content }}
+            </div>
+        </li>
+    {% endfor %}
+</ul>
