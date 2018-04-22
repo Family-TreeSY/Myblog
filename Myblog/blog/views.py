@@ -116,6 +116,7 @@ class PostView(CommonMixin, DetailView):
     context_object_name = "post"
 
     def get_comment(self):
+        """获取评论再传递给模板"""
         target = self.request.path
         comments = Comment.objects.filter(target=target)
         return comments
