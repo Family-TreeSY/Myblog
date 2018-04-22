@@ -6,7 +6,7 @@ from django.views.generic import ListView, DetailView
 from .models import Post, Tag, Category
 from config.models import SideBar
 from comment.models import Comment
-from comment.forms import CommentForm
+from comment.views import CommonShowMixin
 
 
 class CommonMixin(object):
@@ -110,20 +110,7 @@ class AuthorView(BasePostView):
         return qs
 
 
-class PostView(CommonMixin, DetailView):
+class PostView(CommonMixin, CommonShowMixin, DetailView):
     model = Post
     template_name = "blog/detail.html"
     context_object_name = "post"
-
-    def get_comment(self):
-        """获取评论再传递给模板"""
-        target = self.request.path
-        comments = Comment.objects.filter(target=target)
-        return comments
-
-    def get_context_data(self, **kwargs):
-        kwargs.update({
-            "comment_form": CommentForm,
-            "comment_list": self.get_comment(),
-        })
-        return super(PostView, self).get_context_data(**kwargs)
