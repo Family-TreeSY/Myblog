@@ -1,8 +1,43 @@
-<style>
-    .errorlist {color: red}
-</style>
-{% if succeed %}
-    发布成功
-{% else %}
-    {{ form }}
-{% endif %}
+<html>
+<head>
+    <title>评论结果页</title>
+    <style>
+        .errorlist {color: red}
+        body {
+                    TEXT-ALIGN: center;
+                }
+        .result {
+                    text-align: center;
+                    width: 40%;
+                    margin: auto;
+                }
+        ul li {
+                    list-style-type: None;
+                }
+        .hint {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="result">
+    {% if succeed %}
+        发布成功
+        <a href="{{ target }}">返回</a>
+    {% else %}
+        <ul>
+            <div class="errorlist">
+                {% for field, message in forms.errors.items %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </div>
+        </ul>
+        <div class="hint">
+            <p>留言最短不少于5个字符</p>
+        </div>
+
+        <a href="javascript:window.history.back();">返回</a>
+    {% endif %}
+</div>
+</body>
+</html>

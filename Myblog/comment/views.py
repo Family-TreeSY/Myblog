@@ -42,6 +42,6 @@ class CommentView(TemplateView):
         context = {
             "succeed": succeed,
             "form": comment_form,
-
+            "target": target,
         }
         return self.render_to_response(context)
