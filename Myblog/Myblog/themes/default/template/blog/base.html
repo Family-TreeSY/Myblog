@@ -68,7 +68,7 @@
                         {% elif side.display_type == 3 %}
                         <ul>
                             {% for post in hot_posts %}
-                            <li><a href="{% url 'detail' post.pk %}">{{ post.title }} - {{ post.pv }}</a></li>
+                                <li><a href="{% url 'detail' post.pk %}">{{ post.title }}</a></li>
                             {% endfor %}
                         </ul>
                         {% elif side.display_type == 4 %}

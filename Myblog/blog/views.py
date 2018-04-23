@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.views.generic import ListView, DetailView
+from django.core.cache import cache
 
 from .models import Post, Tag, Category
 from config.models import SideBar
@@ -36,10 +37,12 @@ class CommonMixin(object):
         sidebars = SideBar.objects.filter(status=1)
         recently_posts = Post.objects.filter(status=1)[:5]
         recently_comments = Comment.objects.filter(status=1)[:2]
+        hot_posts = Post.objects.filter(status=1).order_by("-pv")[:5]
         kwargs.update({
             "sidebars": sidebars,
             "recently_posts": recently_posts,
             "recently_comments": recently_comments,
+            "hot_posts": hot_posts,
         })
         kwargs.update(self.get_category_context())
         return super(CommonMixin, self).get_context_data(**kwargs)
@@ -121,6 +124,22 @@ class PostView(CommonMixin, CommonShowMixin, DetailView):
         return response
 
     def pv_uv(self):
-        """self.object就是文章post"""
-        self.object.increase_pv()
-        self.object.increase_uv()
+        """pv、uv
+        1、首先先获取cookie
+        2、pv_key的值是用户和文章获取路径
+        3、后面if逻辑的意思是：pv如果用户在30秒内没有访问过，那么就+1
+        4、uv也一样，只不过它的时间限制更长，uv如果用户在24小时内没有访问过，那么就+1
+        """
+        sessionid = self.request.COOKIES.get("sessionid")
+        if not sessionid:
+            return
+
+        pv_key = "pv:%s:%s" % (sessionid, self.request.path)
+        if not cache.get(pv_key):
+            self.object.increase_pv()
+            cache.set(pv_key, 1, 30)
+
+        uv_key = "uv:%s:%s" % (sessionid, self.request.path)
+        if not cache.get(uv_key):
+            self.object.increase_uv()
+            cache.set(uv_key, 1, 60*60*24)
