@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
-
+from django.contrib import admin
 
 from .models import Link, SideBar
+from Myblog.cus_admin import BaseOwnerAdmin
 from Myblog.custom_site import custom_site
-from Myblog.custom_admin import BaseOwnerAdmin
 
 
 @admin.register(Link, site=custom_site)
@@ -62,4 +61,3 @@ class SideBarAdmin(BaseOwnerAdmin):
         # 不加简短描述，管理界面会显示operator
 
     operator.short_description = "操作"
-

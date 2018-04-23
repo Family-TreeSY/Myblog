@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
+from django.contrib import admin
 
 from .models import Post, Category, Tag
 from .adminforms import PostAdminForm
+from Myblog.cus_admin import BaseOwnerAdmin
 from Myblog.custom_site import custom_site
-from Myblog.custom_admin import BaseOwnerAdmin
 
 
 @admin.register(Post, site=custom_site)

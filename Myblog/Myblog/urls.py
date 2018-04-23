@@ -16,12 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from .custom_site import custom_site
 from blog.views import (
     IndexView, CategoryView, TagView, PostView, AuthorView
 )
 from config.views import LinkView
 from comment.views import CommentView
+from .custom_site import custom_site
 
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name="index"),
