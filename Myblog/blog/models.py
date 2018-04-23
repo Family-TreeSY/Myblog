@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import F
 
 import markdown
 
@@ -74,6 +75,8 @@ class Post(models.Model):
     author = models.ForeignKey(User, verbose_name="作者")
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
     last_update_time = models.DateTimeField(auto_now=True, verbose_name="更新时间")
+    pv = models.PositiveIntegerField(default=0, verbose_name="pv")
+    uv = models.PositiveIntegerField(default=0, verbose_name="uv")
 
     def save(self, *args, **kwargs):
         if self.is_markdown:
@@ -85,6 +88,16 @@ class Post(models.Model):
                 ]
             )
         return super(Post, self).save(*args, **kwargs)
+
+    def increase_pv(self):
+        """
+        F()允许Django在未实际链接数据的情况下具有对数据库字段的值的引用，
+        不用获取对象放在内存中再对字段进行操作，直接执行原生产sql语句操作
+        """
+        return type(self).objects.filter(id=self.id).update(pv=F('pv') + 1)
+
+    def increase_uv(self):
+        return type(self).objects.filter(id=self.id).update(uv=F('uv') + 1)
 
     def status_show(self):
         return "当前状态:%s" % self.status

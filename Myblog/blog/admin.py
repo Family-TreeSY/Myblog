@@ -26,6 +26,8 @@ class PostAdmin(BaseOwnerAdmin):
         "status",
         "category",
         "author",
+        "pv",
+        "uv",
         "created_time",
         "operator",
     ]

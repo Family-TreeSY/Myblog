@@ -114,3 +114,13 @@ class PostView(CommonMixin, CommonShowMixin, DetailView):
     model = Post
     template_name = "blog/detail.html"
     context_object_name = "post"
+
+    def get(self, request, *args, **kwargs):
+        response = super(PostView, self).get(request, *args, **kwargs)
+        self.pv_uv()
+        return response
+
+    def pv_uv(self):
+        """self.object就是文章post"""
+        self.object.increase_pv()
+        self.object.increase_uv()
