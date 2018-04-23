@@ -1,7 +1,18 @@
 {% extends "./base.html" %}
+
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/github.css' %}">
+{% endblock %}
+
 {% block content %}
 <html>
 <body>
+<style>
+    .post-element-content {
+            padding-top: 30px;
+    }
+</style>
 <div>
      <nav aria-label="breadcrumb">
       <ol class="breadcrumb">

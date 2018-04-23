@@ -64,8 +64,8 @@ class Post(models.Model):
     title = models.CharField(max_length=50, verbose_name="标题")
     desc = models.CharField(max_length=255, blank=True, verbose_name="摘要")
     is_markdown = models.BooleanField(verbose_name="使用markdown", default=True)
-    content = models.TextField(verbose_name="正文内容", help_text="正文必须为markdown")
-    html = models.TextField(verbose_name='html渲染后的页面', default="", help_text='正文必须为MarkDown格式')
+    content = models.TextField(verbose_name="正文内容", help_text="注：正文可以使用markdown编辑")
+    html = models.TextField(verbose_name='html渲染后的页面', default="", help_text='注：正文可以使用markdown编辑')
     status = models.PositiveIntegerField(
         default=1, choices=STATUS_ITEM, verbose_name="状态"
     )
