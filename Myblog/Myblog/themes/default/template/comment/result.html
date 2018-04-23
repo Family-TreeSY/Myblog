@@ -14,30 +14,31 @@
         ul li {
                     list-style-type: None;
                 }
+         /*提示错误*/
         .hint {
             color: red;
         }
     </style>
 </head>
 <body>
-<div class="result">
-    {% if succeed %}
-        发布成功
-        <a href="{{ target }}">返回</a>
-    {% else %}
-        <ul>
-            <div class="errorlist">
-                {% for field, message in forms.errors.items %}
-                <li>{{ message }}</li>
-            {% endfor %}
+    <div class="result">
+        {% if succeed %}
+            发布成功
+            <a href="{{ target }}">返回</a>
+        {% else %}
+            <ul>
+                <div class="errorlist">
+                    {% for field, message in forms.errors.items %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </div>
+            </ul>
+            <div class="hint">
+                <p>留言最短不少于5个字符</p>
             </div>
-        </ul>
-        <div class="hint">
-            <p>留言最短不少于5个字符</p>
-        </div>
 
-        <a href="javascript:window.history.back();">返回</a>
-    {% endif %}
-</div>
+            <a href="javascript:window.history.back();">返回</a>
+        {% endif %}
+    </div>
 </body>
 </html>
