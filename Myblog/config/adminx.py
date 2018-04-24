@@ -3,14 +3,14 @@ from __future__ import unicode_literals
 
 from django.utils.html import format_html
 from django.urls import reverse
-from django.contrib import admin
+
+import xadmin
 
 from .models import Link, SideBar
-from Myblog.cus_admin import BaseOwnerAdmin
-from Myblog.custom_site import custom_site
+from Myblog.adminx import BaseOwnerAdmin
 
 
-@admin.register(Link, site=custom_site)
+# @admin.register(Link, site=custom_site)
 class LinkAdmin(BaseOwnerAdmin):
     list_display = [
         "title",
@@ -36,7 +36,10 @@ class LinkAdmin(BaseOwnerAdmin):
     operator.short_description = "操作"
 
 
-@admin.register(SideBar, site=custom_site)
+xadmin.site.register(Link, LinkAdmin)
+
+
+# @admin.register(SideBar, site=custom_site)
 class SideBarAdmin(BaseOwnerAdmin):
     list_display = [
         "title",
@@ -61,3 +64,6 @@ class SideBarAdmin(BaseOwnerAdmin):
         # 不加简短描述，管理界面会显示operator
 
     operator.short_description = "操作"
+
+
+xadmin.site.register(SideBar, SideBarAdmin)

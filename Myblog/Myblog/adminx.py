@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib import admin
+import xadmin
+from xadmin.views import CommAdminView
 
-
-class BaseOwnerAdmin(admin.ModelAdmin):
+class BaseOwnerAdmin(object):
     """
     1、save_model - 保证每条数据都属于当前用户
     2、重写get_queryset - 保证每个用户只能看到自己的文章
@@ -20,3 +20,12 @@ class BaseOwnerAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.author = request.user
         return super(BaseOwnerAdmin, self).save_model(request, obj, form, change)
+
+
+class GlobalSetting(CommAdminView):
+    """后台设置"""
+    site_title = 'Myblog'
+    site_footer = 'power by MyBlog@treehl'
+
+
+xadmin.site.register(CommAdminView, GlobalSetting)

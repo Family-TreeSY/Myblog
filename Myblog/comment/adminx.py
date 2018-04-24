@@ -3,15 +3,14 @@ from __future__ import unicode_literals
 
 from django.utils.html import format_html
 from django.urls import reverse
-from django.contrib import admin
 
+import xadmin
 
 from .models import Comment
-from Myblog.cus_admin import BaseOwnerAdmin
-from Myblog.custom_site import custom_site
+from Myblog.adminx import BaseOwnerAdmin
 
 
-@admin.register(Comment, site=custom_site)
+# @admin.register(Comment, site=custom_site)
 class CommentAdmin(BaseOwnerAdmin):
     list_display = [
         "target",
@@ -37,3 +36,6 @@ class CommentAdmin(BaseOwnerAdmin):
         )
     # 不加简短描述，管理界面会显示operator
     operator.short_description = "操作"
+
+
+xadmin.site.register(Comment, CommentAdmin)
