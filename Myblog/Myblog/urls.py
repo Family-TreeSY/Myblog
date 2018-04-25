@@ -13,13 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.conf import settings
 
 import xadmin
 from xadmin.plugins import xversion
-from ckeditor_uploader import urls as uploader_urls
 
 from blog.views import (
     IndexView, CategoryView, TagView, PostView, AuthorView
@@ -48,4 +47,5 @@ urlpatterns = [
     url(r'^tag-autocomplete/$',
         TagAutocomplete.as_view(),
         name='tag-autocomplete'),
-] + uploader_urls.urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
