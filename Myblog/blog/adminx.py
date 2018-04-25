@@ -36,10 +36,11 @@ class PostAdmin(BaseOwnerAdmin):
         "title",
         "category__name",
         "author__username",
+        "tag__name",
     ]
     list_filter = (
         "category",
-        "author",
+        "tag",
     )
     date_hierarchy = "created_time"
     # 编辑页面
@@ -58,10 +59,11 @@ class PostAdmin(BaseOwnerAdmin):
             "基础信息",
             'title',
             'desc',
-            'author',
             'tag',
+            'author',
             Row('category', 'status'),
-            Row('content', 'is_markdown'),
+            # Row('content', 'is_markdown'),
+            'content',
         ),
     )
     # 编辑页面不包含以下字段
@@ -69,7 +71,7 @@ class PostAdmin(BaseOwnerAdmin):
         "html",
         "pv",
         "uv",
-        "author",
+        "is_markdown",
     )
 
     def operator(self, obj):

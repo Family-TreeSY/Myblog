@@ -1,4 +1,16 @@
+<style>
+    .comment {
+        padding-top: 50px;
+    }
+    .talk {
+        padding-top: 50px;
+        color: #212529;
+    }
+</style>
 <hr/>
+<div class="talk">
+    <p>欢迎留言！</p>
+</div>
 <div class="comment">
     <form class="form-group" action="/comment/" method="POST">
         {% csrf_token %}

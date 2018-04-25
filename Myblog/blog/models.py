@@ -87,6 +87,8 @@ class Post(models.Model):
                     'markdown.extensions.toc',
                 ]
             )
+        else:
+            self.html = self.content
         return super(Post, self).save(*args, **kwargs)
 
     def increase_pv(self):

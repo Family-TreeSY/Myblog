@@ -25,6 +25,7 @@ from config.views import LinkView
 from comment.views import CommentView
 from .autocomplete import CategoryAutocomplete, TagAutocomplete
 
+
 xadmin.autodiscover()
 xversion.register_models()
 
