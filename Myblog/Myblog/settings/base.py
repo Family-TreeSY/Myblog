@@ -154,6 +154,7 @@ CKEDITOR_RESTRICY_BY_USER = True
 CKEDITOR_UPLOAD_PATH = 'content/ckeditor'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+DEFAULT_FILE_STORAGE = 'Myblog.storage.MyStorage'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
