@@ -3,14 +3,20 @@ from __future__ import unicode_literals
 
 from django import forms
 
+from dal import autocomplete
+
+from .models import Category, Tag
+
 
 class PostAdminForm(forms.ModelForm):
-    status = forms.BooleanField(label="是否删除", required=True)
     desc = forms.CharField(widget=forms.Textarea, label="摘要", required=False)
-
-    def clean_status(self):
-        # 读取name为status的表单提交值，并赋予status变量
-        if self.cleaned_data["status"]:
-            return 1
-        else:
-            return 2
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        widget=autocomplete.ModelSelect2(url='category-autocomplete'),
+        label='分类',
+    )
+    tag = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects.all(),
+        widget=autocomplete.ModelSelect2Multiple(url='tag-autocomplete'),
+        label='标签',
+    )

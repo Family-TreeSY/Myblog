@@ -59,7 +59,8 @@ class PostAdmin(BaseOwnerAdmin):
             'title',
             'desc',
             'author',
-            Row('category', 'tag', 'status'),
+            'tag',
+            Row('category', 'status'),
             Row('content', 'is_markdown'),
         ),
     )
@@ -68,6 +69,7 @@ class PostAdmin(BaseOwnerAdmin):
         "html",
         "pv",
         "uv",
+        "author",
     )
 
     def operator(self, obj):
