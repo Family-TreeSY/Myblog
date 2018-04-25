@@ -147,6 +147,7 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'full',
         'height': 300,
         'width': 900,
+        'tabSpaces': 4,
     },
 }
 CKEDITOR_RESTRICY_BY_USER = True
