@@ -25,6 +25,11 @@ class PostSerializer(serializers.ModelSerializer):
         read_only=True,  # api接口展示是中文
     )
 
+    created_time = serializers.DateTimeField(
+        # year-month-date hour:minute:second
+        format="%Y-%m-%d %H:%M:%S"
+    )
+
     class Meta:
         model = Post
         fields = (
