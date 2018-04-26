@@ -31,6 +31,9 @@ MIDDLEWARE += [
 # 只有在这个地址下才会生效
 INTERNAL_IPS = ['127.0.0.1']
 
+# toolbar设置cdn
 DEBUG_TOOLBAR_CONFIG = {
     'JQUERY_URL': 'https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js',
 }
+
+SILKY_PYTHON_PROFILER = True
