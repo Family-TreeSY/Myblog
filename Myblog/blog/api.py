@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.models import User
+
 from rest_framework import serializers, viewsets
 
 from .models import Post, Category, Tag
@@ -44,3 +46,16 @@ class TagSerializer(serializers.ModelSerializer):
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.filter(status=1)
     serializer_class = TagSerializer
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+             'id', 'username',
+        )
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.filter(is_staff=True)
+    serializer_class = UserSerializer
