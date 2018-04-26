@@ -19,6 +19,8 @@ from django.conf import settings
 
 import xadmin
 from xadmin.plugins import xversion
+from rest_framework import routers
+from rest_framework.documentation import include_docs_urls
 
 from blog.views import (
     IndexView, CategoryView, TagView, PostView, AuthorView
@@ -26,10 +28,16 @@ from blog.views import (
 from config.views import LinkView
 from comment.views import CommentView
 from .autocomplete import CategoryAutocomplete, TagAutocomplete
+from blog.api import PostViewSet, CategoryViewSet, TagViewSet
 
 
 xadmin.autodiscover()
 xversion.register_models()
+
+router = routers.DefaultRouter()
+router.register(r'posts', PostViewSet)
+router.register(r'categories', CategoryViewSet)
+router.register(r'tags', TagViewSet)
 
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name="index"),
@@ -47,5 +55,8 @@ urlpatterns = [
     url(r'^tag-autocomplete/$',
         TagAutocomplete.as_view(),
         name='tag-autocomplete'),
+    url(r'^api/', include(router.urls)),
+    url(r'^docs/', include_docs_urls(title="Myblog API")),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
