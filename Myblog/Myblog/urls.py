@@ -59,6 +59,6 @@ urlpatterns = [
         TagAutocomplete.as_view(),
         name='tag-autocomplete'),
     url(r'^api/', include(router.urls)),
-    url(r'^docs/', include_docs_urls(title="Myblog API")),
+    url(r'^api/docs/', include_docs_urls(title="Myblog API")),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
