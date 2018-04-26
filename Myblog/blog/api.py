@@ -9,6 +9,22 @@ from .models import Post, Category, Tag
 
 
 class PostSerializer(serializers.ModelSerializer):
+    category = serializers.SlugRelatedField(
+        slug_field='name',
+        read_only=True,  # api接口展示是中文
+    )
+
+    tag = serializers.SlugRelatedField(
+        slug_field='name',
+        read_only=True,  # api接口展示是中文
+        many=True,  # 多对多
+    )
+
+    author = serializers.SlugRelatedField(
+        slug_field='username',
+        read_only=True,  # api接口展示是中文
+    )
+
     class Meta:
         model = Post
         fields = (
