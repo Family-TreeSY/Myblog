@@ -39,8 +39,7 @@ class PostAdmin(BaseOwnerAdmin):
         "tag__name",
     ]
     list_filter = (
-        "category",
-        "tag",
+        "author",
     )
     date_hierarchy = "created_time"
     # 编辑页面
@@ -60,7 +59,6 @@ class PostAdmin(BaseOwnerAdmin):
             'title',
             'desc',
             'tag',
-            'author',
             Row('category', 'status'),
             # Row('content', 'is_markdown'),
             'content',
@@ -100,7 +98,7 @@ class CategoryAdmin(BaseOwnerAdmin):
         "name",
         "status",
         "is_nav",
-        "author",
+        # "author",
     )
 
     def operator(self, obj):
@@ -127,7 +125,7 @@ class TagAdmin(BaseOwnerAdmin):
     fields = (
         "name",
         "status",
-        "author",
+        # "author",
     )
 
     def operator(self, obj):
