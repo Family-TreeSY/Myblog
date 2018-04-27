@@ -3,7 +3,7 @@ import os
 import sys
 
 if __name__ == "__main__":
-    profile = os.environ.get('MYBLOG_PROFILE', 'develop')
+    profile = os.environ.get('MYBLOG_PROFILE', 'product')
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Myblog.settings.%s" % profile)
     try:
         from django.core.management import execute_from_command_line

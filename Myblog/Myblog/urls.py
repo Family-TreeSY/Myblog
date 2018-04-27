@@ -14,9 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-from django.conf.urls.static import static
 from django.conf import settings
+from django.views.static import serve
 
+import re
 import xadmin
 from xadmin.plugins import xversion
 from rest_framework import routers
@@ -42,6 +43,13 @@ router.register(r'category', CategoryViewSet)
 router.register(r'tag', TagViewSet)
 router.register(r'user', UserViewSet)
 
+
+def static(prefix, **kwargs):
+    return [
+        url(r'^%s(?P<path>.*)$' % re.escape(prefix.lstrip('/')), serve, kwargs=kwargs),
+    ]
+
+
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name="index"),
     url(r'^category/(?P<category_id>\d+)/$',
@@ -61,7 +69,7 @@ urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^api/docs/', include_docs_urls(title="Myblog API")),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar

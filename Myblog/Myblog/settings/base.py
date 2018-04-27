@@ -71,8 +71,8 @@ ROOT_URLCONF = 'Myblog.urls'
 
 THEME = 'themes/default'
 
-# 部署的时候用
-STATIC_ROOT = '/tmp/static'
+# 在上一层目录新建static_file目录
+STATIC_ROOT = '../static_files/'
 # 静态资源路径
 STATIC_URL = '/static/'
 # 静态资源所在目录

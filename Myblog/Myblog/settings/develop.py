@@ -36,4 +36,5 @@ DEBUG_TOOLBAR_CONFIG = {
     'JQUERY_URL': 'https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js',
 }
 
+# 每个请求将分别进行配置
 SILKY_PYTHON_PROFILER = True
