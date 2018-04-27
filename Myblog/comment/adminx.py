@@ -5,6 +5,7 @@ from django.utils.html import format_html
 from django.urls import reverse
 
 import xadmin
+from xadmin.layout import Fieldset, Row
 
 from .models import Comment
 from Myblog.adminx import BaseOwnerAdmin
@@ -27,6 +28,19 @@ class CommentAdmin(BaseOwnerAdmin):
         "content",
         "website",
         "email",
+    )
+
+    form_layout = (
+        Fieldset(
+            Row('target', 'status'),
+            'content',
+            'website',
+            'email',
+        ),
+    )
+
+    exclude = (
+        'author',
     )
 
     def operator(self, obj):

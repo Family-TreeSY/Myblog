@@ -5,6 +5,7 @@ from django.utils.html import format_html
 from django.urls import reverse
 
 import xadmin
+from xadmin.layout import Fieldset, Row
 
 from .models import Link, SideBar
 from Myblog.adminx import BaseOwnerAdmin
@@ -20,10 +21,17 @@ class LinkAdmin(BaseOwnerAdmin):
         "created_time",
         "operator",
     ]
-    fields = (
-        ("title", "weight"),
-        "href",
-        "author",
+    form_layout = (
+        Fieldset(
+            "基础信息",
+            'title',
+            'weight',
+            'href'
+        ),
+    )
+
+    exclude = (
+        'author',
     )
 
     def operator(self, obj):
@@ -45,15 +53,21 @@ class SideBarAdmin(BaseOwnerAdmin):
         "title",
         "status",
         "display_type",
-        "author",
         "created_time",
         "operator"
     ]
-    fields = (
-        ("title", "status"),
-        "display_type",
-        "author",
-        "content",
+
+    form_layout = (
+        Fieldset(
+            "基础信息",
+            Row('title', 'status'),
+            'display_type',
+            'content',
+        ),
+    )
+
+    exclude = (
+        'author',
     )
 
     def operator(self, obj):

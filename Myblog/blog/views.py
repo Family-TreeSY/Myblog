@@ -10,7 +10,22 @@ from comment.models import Comment
 from comment.views import CommonShowMixin
 
 
+def cache_it(func):
+    def wrapper(self, *args, **kwargs):
+        key = repr((func.__name__, args, kwargs))
+        result = cache.get(key)
+        if result:
+            print("Hit cache!")
+            return result
+        print("Hit db")
+        result = func(self, *args, **kwargs)
+        cache.set(key, result, 60*5)
+        return result
+    return wrapper
+
+
 class CommonMixin(object):
+    @cache_it
     def get_category_context(self):
         """分类
             1、nav_cates = categoryies.filter(is_nav=True) 导航分类
