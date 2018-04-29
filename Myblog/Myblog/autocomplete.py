@@ -31,7 +31,6 @@ class TagAutocomplete(autocomplete.Select2QuerySetView):
             return Tag.objects.none()
 
         qs = Tag.objects.all()
-
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
         return qs

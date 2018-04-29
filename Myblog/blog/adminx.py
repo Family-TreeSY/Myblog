@@ -59,8 +59,9 @@ class PostAdmin(BaseOwnerAdmin):
             'title',
             'desc',
             'tag',
-            Row('category', 'status'),
-            # Row('content', 'is_markdown'),
+            # Row('category', 'status'),
+            'category',
+            'status',
             'content',
         ),
     )
@@ -70,6 +71,7 @@ class PostAdmin(BaseOwnerAdmin):
         "pv",
         "uv",
         "is_markdown",
+        "author",
     )
 
     def operator(self, obj):
@@ -115,6 +117,7 @@ xadmin.site.register(Category, CategoryAdmin)
 
 # @admin.register(Tag, site=custom_site)
 class TagAdmin(BaseOwnerAdmin):
+    form = PostAdminForm
     list_display = [
         "name",
         "status",
