@@ -78,7 +78,7 @@ tags:
 3. [配置ckeditor](https://github.com/Family-TreeSY/Myblog/blob/master/Doc/%E4%BA%8C%E5%8D%81%E5%9B%9B%E3%80%81%E9%85%8D%E7%BD%AEckeditor.md)
 4. [配置Django-Rest-Framework](https://github.com/Family-TreeSY/Myblog/blob/master/Doc/%E4%BA%8C%E5%8D%81%E4%BA%94%E3%80%81%E9%85%8D%E7%BD%AEDjango-Rest-Framework.md)
 5. [配置Django-Debug-ToolBar](https://github.com/Family-TreeSY/Myblog/blob/master/Doc/%E4%BA%8C%E5%8D%81%E5%85%AD%E3%80%81%E9%85%8D%E7%BD%AEDjango-Debug-ToolBar.md)
-6. [二十七、配置Django-Silk](https://github.com/Family-TreeSY/Myblog/blob/master/Doc/%E4%BA%8C%E5%8D%81%E4%B8%83%E3%80%81%E9%85%8D%E7%BD%AEDjango-Silk.md)
+6. [配置Django-Silk](https://github.com/Family-TreeSY/Myblog/blob/master/Doc/%E4%BA%8C%E5%8D%81%E4%B8%83%E3%80%81%E9%85%8D%E7%BD%AEDjango-Silk.md)
 7. [配置MySQL](https://github.com/Family-TreeSY/Myblog/blob/master/Doc/%E4%BA%8C%E5%8D%81%E5%85%AB%E3%80%81%E9%85%8D%E7%BD%AEMySQL.md)
 8. [配置Cache Redis](https://github.com/Family-TreeSY/Myblog/blob/master/Doc/%E4%BA%8C%E5%8D%81%E4%B9%9D%E3%80%81%E9%85%8D%E7%BD%AECache%20Redis.md)
 
