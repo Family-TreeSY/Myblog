@@ -84,6 +84,6 @@ tags:
 
 **四、部署项目**
 
-1. [使用nginx和gunicorn部署网站]()
+1. [使用nginx和gunicorn部署网站](https://github.com/Family-TreeSY/Myblog/blob/master/Doc/%E4%B8%89%E5%8D%81%E3%80%81%E4%BD%BF%E7%94%A8Nginx%E5%92%8CGunicorn%E9%83%A8%E7%BD%B2%E7%BD%91%E7%AB%99.md)
 2. [使用Fabric自动部署]()
 
