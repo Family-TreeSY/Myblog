@@ -117,7 +117,6 @@ xadmin.site.register(Category, CategoryAdmin)
 
 # @admin.register(Tag, site=custom_site)
 class TagAdmin(BaseOwnerAdmin):
-    form = PostAdminForm
     list_display = [
         "name",
         "status",
