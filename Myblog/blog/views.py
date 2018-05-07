@@ -68,7 +68,7 @@ class BasePostView(CommonMixin, ListView):
     IndexView,CategoryView,TagView都是指向文章post的，所以这里写一个父类BasePostView
     """
     model = Post
-    paginate_by = 3
+    paginate_by = 10
     template_name = "blog/list.html"
     context_object_name = "posts"
 
