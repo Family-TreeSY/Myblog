@@ -9,6 +9,7 @@ from xadmin.layout import Fieldset, Row
 
 from .models import Link, SideBar
 from Myblog.adminx import BaseOwnerAdmin
+from adminforms import SideBarAdminForm
 
 
 # @admin.register(Link, site=custom_site)
@@ -49,6 +50,7 @@ xadmin.site.register(Link, LinkAdmin)
 
 # @admin.register(SideBar, site=custom_site)
 class SideBarAdmin(BaseOwnerAdmin):
+    form = SideBarAdminForm
     list_display = [
         "title",
         "status",
