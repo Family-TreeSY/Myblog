@@ -6,6 +6,9 @@
 ![](https://img.shields.io/badge/Django--silk-2.0-red.svg) ![](https://img.shields.io/badge/Redis-4.0.9-lightgrey.svg) ![](https://img.shields.io/badge/MySQL-5.7.21-blue.svg) ![](https://img.shields.io/badge/Bootstrap-4.1.0-brown.svg)
 
 **欢迎访问**   [www.treehl.top](http://treehl.top/) ，此博客仅作为项目展示
+
+维护博客：[Treehl的博客](https://family-treesy.github.io/)
+
 ### 简介
 
 - 项目主要是记录学习Django的过程
