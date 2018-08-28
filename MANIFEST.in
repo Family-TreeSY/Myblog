@@ -1,0 +1,1 @@
+recursive-include Myblog *.py *.html *.css *.js
