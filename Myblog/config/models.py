@@ -30,6 +30,9 @@ class Link(models.Model):
     def __unicode__(self):
         return self.title
 
+    def __str__(self):
+        return self.title
+
 
 class SideBar(models.Model):
     """侧边栏"""
@@ -63,4 +66,7 @@ class SideBar(models.Model):
         verbose_name = verbose_name_plural = "侧边栏"
 
     def __unicode__(self):
+        return self.title
+
+    def __str__(self):
         return self.title

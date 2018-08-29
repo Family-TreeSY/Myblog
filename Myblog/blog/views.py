@@ -19,13 +19,13 @@ def cache_it(func):
             return result
         print("Hit db")
         result = func(self, *args, **kwargs)
-        cache.set(key, result, 60*5)
+        cache.set(key, result, 60 * 5)
         return result
     return wrapper
 
 
 class CommonMixin(object):
-    @cache_it
+    # @cache_it
     def get_category_context(self):
         """分类
             1、nav_cates = categoryies.filter(is_nav=True) 导航分类
@@ -82,6 +82,7 @@ class IndexView(BasePostView):
     4、如果query存在就过滤出所有以query开头的数据，i表示不区分大小写，
     如果query不存在就返回
     """
+
     def get_queryset(self):
         query = self.request.GET.get("query")
         qs = super(IndexView, self).get_queryset()
@@ -100,6 +101,7 @@ class CategoryView(BasePostView):
     2、self.kwargs从url中得到category_id
     3、get_queryset获取全部文章后再使用filter来过滤分类并返回
     """
+
     def get_queryset(self):
         qs = super(CategoryView, self).get_queryset()
         # self.kwargs:获取url中的名字,(?P<category_id>\d+)
@@ -157,4 +159,4 @@ class PostView(CommonMixin, CommonShowMixin, DetailView):
         uv_key = "uv:%s:%s" % (sessionid, self.request.path)
         if not cache.get(uv_key):
             self.object.increase_uv()
-            cache.set(uv_key, 1, 60*60*24)
+            cache.set(uv_key, 1, 60 * 60 * 24)

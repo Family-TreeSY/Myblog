@@ -27,6 +27,9 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
 
 class Tag(models.Model):
     STATUS_ITEMS = (
@@ -44,6 +47,9 @@ class Tag(models.Model):
         verbose_name = verbose_name_plural = "标签"
 
     def __unicode__(self):
+        return self.name
+
+    def __str__(self):
         return self.name
 
 
@@ -111,4 +117,7 @@ class Post(models.Model):
         ordering = ['-id']
 
     def __unicode__(self):
+        return self.title
+
+    def __str__(self):
         return self.title

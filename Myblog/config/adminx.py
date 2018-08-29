@@ -9,7 +9,7 @@ from xadmin.layout import Fieldset, Row
 
 from .models import Link, SideBar
 from Myblog.adminx import BaseOwnerAdmin
-from adminforms import SideBarAdminForm
+from .adminforms import SideBarAdminForm
 
 
 # @admin.register(Link, site=custom_site)

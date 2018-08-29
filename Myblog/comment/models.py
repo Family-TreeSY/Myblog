@@ -25,3 +25,6 @@ class Comment(models.Model):
 
     def __unicode__(self):
         return self.target
+    
+    def __str__(self):
+        return self.target
