@@ -85,6 +85,7 @@
 
 1. [使用nginx和gunicorn部署网站](https://github.com/Family-TreeSY/Myblog/blob/master/Doc/%E4%B8%89%E5%8D%81%E3%80%81%E4%BD%BF%E7%94%A8Nginx%E5%92%8CGunicorn%E9%83%A8%E7%BD%B2%E7%BD%91%E7%AB%99.md)
 2. [使用Fabric自动部署]()
+3. [迁移至Python3](https://github.com/Family-TreeSY/Myblog/blob/master/Doc/%E4%B8%89%E5%8D%81%E4%B8%80%E3%80%81%E8%BF%81%E7%A7%BB%E8%87%B3Python3.md)
 
 
 ### 展示
