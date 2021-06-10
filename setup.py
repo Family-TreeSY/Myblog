@@ -20,7 +20,7 @@ setup(
     # 方法二、增加MANIFEST.in
     include_package_data=True,
     install_requires=[
-        'django==1.11.3',
+        'django==2.2.24',
     ],
     scripts=[
         'Myblog/manage.py',
